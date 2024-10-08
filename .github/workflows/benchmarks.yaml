@@ -28,7 +28,7 @@ jobs:
           REPORTS_DIR=build/reports/benchmarks/main
           DIR_NAME=$(ls $REPORTS_DIR | head -n1)
           mkdir -p results
-          ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do cp $report_json results/$DIR_NAME-${{matrix.os}}-jdk${{matrix.version}}; done
+          ls $REPORTS_DIR/$DIR_NAME/*.json | while read report_json; do cp $report_json results/$DIR_NAME-${{matrix.os}}-jdk${{matrix.version}}.json; done
 
       - name: Publish results
         uses: peter-evans/create-pull-request@v5
