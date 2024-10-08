@@ -21,7 +21,7 @@ jobs:
           #architecture: x64
 
       - name: Run benchmarks
-        run: ./gradlew jvmBenchmark
+        run: ./gradlew jvmBenchmark -PjvmVersion=${{matrix.version}}
 
       - name: Copy results
         run: |

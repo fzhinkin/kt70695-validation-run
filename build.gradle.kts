@@ -14,7 +14,7 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain((properties["jvmVersion"]!! as String).toInt())
 
     jvm()
 
