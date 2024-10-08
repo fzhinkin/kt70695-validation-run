@@ -14,17 +14,9 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(8)
 
     jvm()
-
-    macosArm64()
-    macosX64()
-    linuxX64()
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs { nodejs() }
-    js(IR) { nodejs() }
 
     sourceSets {
         commonMain {
@@ -41,11 +33,6 @@ benchmark {
             this as JvmBenchmarkTarget
             jmhVersion = "1.37"
         }
-        register("macosArm64")
-        register("macosX64")
-        register("linuxX64")
-        register("js")
-        register("wasmJs")
     }
 
     configurations {
