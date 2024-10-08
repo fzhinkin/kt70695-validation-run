@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  jvme:
+  jvm:
     strategy:
       matrix:
         version: ['8', '11', '17', '21']
@@ -38,5 +38,5 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: results-${{ github.job }}
+          branch: results-${{ github.job }}-${{ matrix.os }}-jdk${{ matrix.version }}
           title: 'Benchmarking report'
