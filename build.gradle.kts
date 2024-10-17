@@ -18,6 +18,10 @@ kotlin {
 
     jvm()
 
+    js {
+        nodejs()
+    }
+
     sourceSets {
         commonMain {
             dependencies {
@@ -33,6 +37,7 @@ benchmark {
             this as JvmBenchmarkTarget
             jmhVersion = "1.37"
         }
+        register("js")
     }
 
     configurations {
