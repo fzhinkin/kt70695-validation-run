@@ -3,6 +3,7 @@ package org.example
 import kotlinx.benchmark.*
 import org.openjdk.jmh.annotations.Fork
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 // Code below was copied from https://youtrack.jetbrains.com/issue/KT-70695/Float-Double.isFinite-can-be-optimized#focus=Comments-27-10774274.0-0
 // and slightly modified.
@@ -51,6 +52,15 @@ open class KotlinBenchmark {
         }
         return r
     }
+
+    @Benchmark
+    fun javaLangIsFiniteInlined(state: FloatState): Boolean {
+        var r = false
+        for (f in state.data) {
+            r = r or f.javaLangIsFiniteInlined()
+        }
+        return r
+    }
 }
 
 @Suppress("NOTHING_TO_INLINE")
@@ -58,3 +68,6 @@ inline fun Float.fastIsFinite(): Boolean = (toRawBits() and 0x7fffffff) < 0x7f80
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun Float.javaLangIsFinite(): Boolean = java.lang.Float.isFinite(this)
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun Float.javaLangIsFiniteInlined(): Boolean = abs(this) <= Float.MAX_VALUE
